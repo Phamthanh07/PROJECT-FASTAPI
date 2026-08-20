@@ -10,9 +10,9 @@ class EventStaffCreate(EventStaffBase):
     pass
 
 class EventStaffUpdate(BaseModel):
-    event_id: Optional[int] = None
-    user_id: Optional[int] = None
-    role: Optional[str] = None   # OWNER / MEMBER
+    event_id: int | None = None
+    user_id:int | None = None
+    role:str | None = None  
 
 class EventStaffResponse(EventStaffBase):
     model_config = {
