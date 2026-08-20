@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional
 
 class EventStaffBase(BaseModel):
     event_id: int
@@ -7,6 +8,11 @@ class EventStaffBase(BaseModel):
 
 class EventStaffCreate(EventStaffBase):
     pass
+
+class EventStaffUpdate(BaseModel):
+    event_id: Optional[int] = None
+    user_id: Optional[int] = None
+    role: Optional[str] = None   # OWNER / MEMBER
 
 class EventStaffResponse(EventStaffBase):
     model_config = {
