@@ -3,6 +3,11 @@ from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime, timezone
 
+from app.db.database import Base
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
+from datetime import datetime, timezone
+
 class EventTask(Base):
     __tablename__ = "event_tasks"
 
@@ -23,8 +28,8 @@ class EventTask(Base):
         nullable=True
     )
 
-    status = Column(String(50), nullable=False)      # TODO / IN_PROGRESS / DONE
-    priority = Column(String(50), nullable=False)    # LOW / MEDIUM / HIGH
+    status = Column(String(50), nullable=False)
+    priority = Column(String(50), nullable=False)
 
     due_date = Column(DateTime(timezone=True))
     created_at = Column(
@@ -34,4 +39,4 @@ class EventTask(Base):
 
     # QUAN HỆ
     event = relationship("Event", back_populates="tasks")
-    assignee = relationship("User", backref="assigned_tasks")
+    assignee = relationship("User", back_populates="assigned_tasks")

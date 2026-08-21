@@ -14,7 +14,7 @@ class Settings(BaseSettings):
 
     # --- Cấu hình CORS ---
     # Đọc từ biến môi trường ALLOWED_ORIGINS trong file .env (dạng JSON list)
-    ALLOWED_ORIGINS: list[str] = ["http://localhost:3000", "http://localhost:5173"]
+    # ALLOWED_ORIGINS: list[str] = ["http://localhost:3000", "http://localhost:5173"]
 
     class Config:
         # Chỉ định file .env để pydantic-settings tự động đọc

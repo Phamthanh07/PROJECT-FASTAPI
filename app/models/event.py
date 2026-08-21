@@ -3,6 +3,11 @@ from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime, timezone
 
+from app.db.database import Base
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
+from datetime import datetime, timezone
+
 class Event(Base):
     __tablename__ = "events"
 
@@ -22,9 +27,14 @@ class Event(Base):
     )
 
     # QUAN HỆ
-    owner = relationship("User", backref="events")
+    owner = relationship("User", back_populates="events")
     staff = relationship("EventStaff", back_populates="event")
     tasks = relationship("EventTask", back_populates="event")
+
+
+from app.db.database import Base
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 
 class EventStaff(Base):
     __tablename__ = "event_staff"
@@ -41,8 +51,8 @@ class EventStaff(Base):
         primary_key=True
     )
 
-    role = Column(String(50), nullable=False)  # OWNER / MEMBER
+    role = Column(String(50), nullable=False)
 
     # QUAN HỆ
     event = relationship("Event", back_populates="staff")
-    user = relationship("User", backref="event_memberships")
+    user = relationship("User", back_populates="event_memberships")
