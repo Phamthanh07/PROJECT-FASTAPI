@@ -35,3 +35,27 @@ def authenticate_user(db: Session, email: str, password: str):
         raise HTTPException(status_code=400, detail="Tài khoản đã bị khóa")
 
     return user
+
+def get_users(email: str | None, is_active: bool | None, db: Session):
+    query = db.query(User)
+
+    if email:
+        query = query.filter(User.email.like(f"%{email}%"))
+
+    if is_active is not None:
+        query = query.filter(User.is_active == is_active)
+
+    users = query.all()
+
+    # Không trả password_hash
+    return [
+        {
+            "id": u.id,
+            "email": u.email,
+            "full_name": u.full_name,
+            "role": u.role,
+            "is_active": u.is_active,
+            "created_at": u.created_at
+        }
+        for u in users
+    ]
