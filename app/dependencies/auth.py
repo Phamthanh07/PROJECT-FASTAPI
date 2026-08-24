@@ -8,13 +8,14 @@ from app.core.config import settings
 
 reusable_oauth2 = HTTPBearer()
 
+#lấy user từ token
 async def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(reusable_oauth2),
     db: Session = Depends(get_db)
 ) -> User:
 
     token = credentials.credentials
-
+    print(token)
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
         email = payload.get("sub")

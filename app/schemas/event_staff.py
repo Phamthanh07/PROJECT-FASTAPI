@@ -5,8 +5,9 @@ class EventStaffBase(BaseModel):
     user_id: int
     role: str   
 
-class EventStaffCreate(EventStaffBase):
-    pass
+class EventStaffCreate(BaseModel):
+    user_id: int
+    role: str
 
 class EventStaffUpdate(BaseModel):
     event_id: int | None = None

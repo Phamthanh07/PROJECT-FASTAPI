@@ -6,7 +6,7 @@ class EventBase(BaseModel):
     description: str | None = None
 
 class EventCreate(EventBase):
-    owner_id: int
+   pass
 
 class EventUpdate(BaseModel):
     name: str | None = None
@@ -17,6 +17,9 @@ class EventResponse(EventBase):
     owner_id: int
     created_at: datetime
 
+#Cho phép Pydantic lấy dữ liệu trực tiếp từ object SQLAlchemy Model.
     model_config = {
         "from_attributes": True
     }
+
+

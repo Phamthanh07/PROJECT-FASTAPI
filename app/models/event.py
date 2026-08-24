@@ -3,10 +3,6 @@ from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime, timezone
 
-from app.db.database import Base
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
-from sqlalchemy.orm import relationship
-from datetime import datetime, timezone
 
 class Event(Base):
     __tablename__ = "events"
