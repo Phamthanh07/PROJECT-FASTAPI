@@ -1,8 +1,8 @@
-from pydantic import BaseModel
+from pydantic import BaseModel,Field
 from datetime import datetime
 
 class EventBase(BaseModel):
-    name: str
+    name: str 
     description: str | None = None
 
 class EventCreate(EventBase):

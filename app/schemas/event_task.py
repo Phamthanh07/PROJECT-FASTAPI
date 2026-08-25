@@ -8,8 +8,11 @@ class EventTaskBase(BaseModel):
     priority: str
     due_date: datetime | None = None
 
-class EventTaskCreate(EventTaskBase):
-    event_id: int
+class EventTaskCreate(BaseModel):  # KHÔNG kế thừa Base
+    title: str
+    description: str | None = None
+    priority: str
+    due_date: datetime | None = None
     assignee_id: int | None = None
 
 class EventTaskUpdate(BaseModel):

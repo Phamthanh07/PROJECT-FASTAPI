@@ -19,7 +19,7 @@ def create_event_api(
     event = create_event(db, data, current_user)
     return event
 
-@router.get("/", response_model=list[EventResponse])
+@router.get("/", response_model=list[EventResponse]) #nếu k có list thì trả về 1 object
 def list_events(
     search: str | None = None,
     db: Session = Depends(get_db),

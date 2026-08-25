@@ -11,7 +11,7 @@ app = FastAPI(
 app.include_router(auth.router)
 app.include_router(users.router)
 app.include_router(event.router)
-# app.include_router(event_task.router)
+app.include_router(event_task.router)
 
 
 Base.metadata.create_all(bind = engine)
