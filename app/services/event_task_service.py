@@ -108,7 +108,7 @@ def update_event_task(db: Session, current_user, task_id: int, data: EventTaskUp
 
     update_data = data.model_dump(exclude_unset=True)
 
-    # Và khi bạn update, nó sẽ ghi đè tất cả thành None Task bị xóa sạch dữ liệu.Vậy nên exclude_unset=True là bắt buộc.
+    #khi không có exclude Và khi bạn update, nó sẽ ghi đè tất cả thành None bị xóa sạch dữ liệu.Vậy nên exclude_unset=True là bắt buộc.
 
     if "priority" in update_data and update_data["priority"] not in VALID_PRIORITY:
         bad_request("Priority không hợp lệ")
@@ -129,6 +129,8 @@ def update_event_task(db: Session, current_user, task_id: int, data: EventTaskUp
 
     for field, value in update_data.items():
         setattr(task, field, value)
+
+        #setattr ghi tắt của task.field = value
 
     db.commit()
     db.refresh(task)
