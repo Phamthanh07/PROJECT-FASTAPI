@@ -14,8 +14,7 @@ from app.services.event_task_service import (
     update_event_task,
     delete_event_task,
     assign_event_task,
-    search_event_tasks_service,
-    paginate_event_tasks_service
+    list_event_tasks_service
 )
 from app.dependencies.auth import get_current_user
 
@@ -59,16 +58,22 @@ def assign_event_task_endpoint(task_id: int, assignee_id: int,db: Session = Depe
 
 
 # 8. Search & filter
-@router.get("/{event_id}/event-tasks/search", response_model=list[EventTaskResponse])
-def search_event_tasks(event_id: int,status: str | None = None,priority: str | None = None,assignee_id: int | None = None,title: str | None = None,db: Session = Depends(get_db),current_user=Depends(get_current_user)):
-    return search_event_tasks_service(
-        db, current_user, event_id, status, priority, assignee_id, title
-    )
-
-
-# 9. Pagination & sort
-@router.get("/{event_id}/event-tasks/paginate", response_model=list[EventTaskResponse])
-def paginate_event_tasks(event_id: int,page: int = 1,size: int = 10,sort_by: str = "created_at",order: str = "desc",db: Session = Depends(get_db),current_user=Depends(get_current_user)):
-    return paginate_event_tasks_service(
-        db, current_user, event_id, page, size, sort_by, order
+@router.get("/{event_id}/event-tasks", response_model=list[EventTaskResponse])
+def list_event_tasks(
+    event_id: int,
+    status: str | None = None,
+    priority: str | None = None,
+    assignee_id: int | None = None,
+    title: str | None = None,
+    page: int = 1,
+    size: int = 10,
+    sort_by: str = "created_at",
+    order: str = "desc",
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user)
+):
+    return list_event_tasks_service(
+        db, current_user, event_id,
+        status, priority, assignee_id, title,
+        page, size, sort_by, order
     )
